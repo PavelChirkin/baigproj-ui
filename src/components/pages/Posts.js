@@ -1,3 +1,16 @@
+import {useEffect, useState} from "react";
+import {getPosts} from "../../api/postApi";
+
 export default () => {
-    return <div>Posts</div>
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        getPosts()
+            .then(({data}) => setPosts(data))
+            .catch((error) => console.log(error))
+    }, []);
+
+    return (
+        <>{JSON.stringify(posts)}</>
+    )
 }
