@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -32,17 +33,26 @@ export default function Header(props) {
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
-                <Button size="small">Subscribe</Button>
-                <Typography
+                <Link
+                    variant="button"
+                    color="text.primary"
+                    to="/posts/create"
+                    sx={{my: 1, mx: 1.5}}
+                    component={NavLink}>
+                    Create new post
+                </Link>
+                <Link
                     component="h2"
                     variant="h5"
                     color="inherit"
                     align="center"
+                    to="/"
                     noWrap
                     className={classes.toolbarTitle}
+                    component={NavLink}
                 >
                     My Blog
-                </Typography>
+                </Link>
                 <IconButton>
                     <SearchIcon />
                 </IconButton>
