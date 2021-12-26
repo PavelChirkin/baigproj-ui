@@ -10,3 +10,6 @@
 .cardContent {
     flex-grow: 1;
 }
+.post-form {
+    margin: 25px;
+}
