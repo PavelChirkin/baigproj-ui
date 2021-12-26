@@ -1,4 +1,4 @@
-import {useEffect, useState, useStyles} from "react";
+import React, {useEffect, useState, useStyles} from "react";
 import {getPosts} from "../../api/postApi";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +8,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import '../../style.css'
+import {NavLink} from "react-router-dom";
+import Link from "@material-ui/core/Link";
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -31,8 +33,19 @@ const Posts = () => {
                                 <Typography>
                                     {post.anons}
                                 </Typography>
+                                <Typography>
+                                    {post.id}
+                                </Typography>
                             </CardContent>
                             <CardActions>
+                                <Link
+                                    variant="button"
+                                    color="text.primary"
+                                    to="/posts/view/${post.id}"
+                                    sx={{my: 1, mx: 1.5}}
+                                    component={NavLink}>
+                                    View details
+                                </Link>
                                 <Button size="small" color="primary">
                                     View
                                 </Button>

@@ -4,6 +4,7 @@ import GlobalStyles from "@mui/material/GlobalStyles";
 import Posts from "../pages/Posts";
 import {Route, Routes} from "react-router-dom";
 import CreatePost from "../forms/CreatePost";
+import Post from "../pages/Post";
 
 
 
@@ -15,6 +16,7 @@ export default () => {
             <Routes>
                 <Route path="/" element={<Posts/>}/>
                 <Route path="/posts/create" element={<CreatePost/>}/>
+                <Route path="/posts/view/:postId" element={<Post/>}/>
             </Routes>
         </>
     )
