@@ -1,0 +1,18 @@
+{
+  "translation": {
+    "name": "Vardas"
+  },
+  "post": {
+    "title": "Straipsnio pavadinimas"
+  },
+  "CreatePost": {
+    "title": "Straipsnio pavadinimas",
+    "category": "Kategorija",
+    "anons": "Anonsas",
+    "fulltext": "Straipsnio tekstas",
+    "submit": "Pateikti"
+  },
+  "comment" : {
+    "text" : "Komentaro tekstas"
+  }
+}

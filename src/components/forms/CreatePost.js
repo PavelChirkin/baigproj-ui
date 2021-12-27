@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import '../../style.css'
 import {createPost} from "../../api/postApi";
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 const validationSchema = Yup.object().shape({
     title: Yup.string()
@@ -36,6 +37,8 @@ export default () => {
             .finally(() => helpers.setSubmitting(false));
     }
 
+    const {t} = useTranslation('CreatePost');
+
     return (
 
         <Formik initialValues={{
@@ -59,25 +62,25 @@ export default () => {
                         <Form className="post-form">
                             <TextFieldInput error={props.touched.name && !!props.errors.title}
                                             fieldName="title"
-                                            label="Name:"
+                                            label={t('title')}
                                             placeholder="Type title..."/>
                             <TextFieldInput error={props.touched.category && !!props.errors.category}
                                             fieldName="category"
-                                            label="Category:"/>
+                                            label={t('category')}/>
                             <TextFieldInput error={props.touched.anons && !!props.errors.anons}
                                             fieldName="anons"
-                                            label="Anons:"
+                                            label={t('anons')}
                                             placeholder="Type anons..."
                                             multiline
                                             rows={3}/>
                             <TextFieldInput error={props.touched.fulltext && !!props.errors.fulltext}
                                             fieldName="fulltext"
-                                            label="Post text:"
+                                            label={t('fulltext')}
                                             placeholder="Type yours post text..."
                                             multiline
                                             rows={6}/>
                             {
-                                props.isSubmitting ? <CircularProgress/> : <Button type="submit">Submit</Button>
+                                props.isSubmitting ? <CircularProgress/> : <Button type="submit">{t('submit')}</Button>
                             }
                         </Form>
                     </Paper>

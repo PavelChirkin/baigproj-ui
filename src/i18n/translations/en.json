@@ -1,0 +1,20 @@
+{
+  "translation": {
+    "key": "Welcome to react i18n",
+    "keyWithParams": "Hi {{name}} {{surname}}",
+    "name": "Name"
+  },
+  "post": {
+    "title": "Post title"
+  },
+  "CreatePost": {
+    "title": "Post title",
+    "category": "Category",
+    "anons": "Anons",
+    "fulltext": "Full text",
+    "submit": "Submit"
+  },
+  "comment" : {
+    "text" : "Comment text"
+  }
+}

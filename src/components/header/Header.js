@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import {NavLink} from "react-router-dom";
+import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -59,6 +60,7 @@ export default function Header(props) {
                 <Button variant="outlined" size="small">
                     Sign up
                 </Button>
+                <LanguageSwitcher/>
             </Toolbar>
         </React.Fragment>
     );

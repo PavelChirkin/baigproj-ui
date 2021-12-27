@@ -10,6 +10,7 @@ import Container from '@material-ui/core/Container';
 import '../../style.css'
 import {NavLink} from "react-router-dom";
 import Link from "@material-ui/core/Link";
+import {useTranslation} from "react-i18next";
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -19,6 +20,8 @@ const Posts = () => {
             .then(({data}) => setPosts(data))
             .catch((error) => console.log(error))
     }, []);
+
+    const {t} = useTranslation();
 
     return (
         <Container className="cardGrid" maxWidth="md">
@@ -41,7 +44,8 @@ const Posts = () => {
                                 <Link
                                     variant="button"
                                     color="text.primary"
-                                    to="/posts/view/${post.id}"
+                                    to='/posts/view/{value}'
+                                    value={post.id}
                                     sx={{my: 1, mx: 1.5}}
                                     component={NavLink}>
                                     View details
