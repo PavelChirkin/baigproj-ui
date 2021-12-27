@@ -39,20 +39,20 @@ const Posts = () => {
                                 <Typography>
                                     {post.id}
                                 </Typography>
+                                <Typography>
+                                   Comments: {post.commentSet.length}
+                                </Typography>
                             </CardContent>
                             <CardActions>
                                 <Link
                                     variant="button"
                                     color="text.primary"
-                                    to='/posts/view/{value}'
-                                    value={post.id}
+                                    to={`/posts/view/${post.id}`}
                                     sx={{my: 1, mx: 1.5}}
                                     component={NavLink}>
                                     View details
                                 </Link>
-                                <Button size="small" color="primary">
-                                    View
-                                </Button>
+
                                 <Button size="small" color="primary">
                                     Edit
                                 </Button>

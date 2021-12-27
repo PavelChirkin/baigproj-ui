@@ -5,8 +5,16 @@ import Posts from "../pages/Posts";
 import {Route, Routes} from "react-router-dom";
 import CreatePost from "../forms/CreatePost";
 import Post from "../pages/Post";
+import {makeStyles} from "@material-ui/core/styles";
+import Image from "../../img/texturetastic_gray.png";
 
 
+const useStyles = makeStyles((theme) => ({
+    toolbar: {
+        backgroundImage: Image,
+    },
+
+}));
 
 export default () => {
     return (

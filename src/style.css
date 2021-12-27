@@ -6,10 +6,14 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
 }
 .cardContent {
     flex-grow: 1;
 }
 .post-form {
     margin: 25px;
+}
+.single_button {
+    margin: 10px;
 }

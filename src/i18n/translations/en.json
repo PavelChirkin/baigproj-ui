@@ -14,6 +14,11 @@
     "fulltext": "Full text",
     "submit": "Submit"
   },
+  "Header": {
+    "My Blog": "My Blog",
+    "Create new post": "Create new post",
+    "Login": "Login"
+  },
   "comment" : {
     "text" : "Comment text"
   }

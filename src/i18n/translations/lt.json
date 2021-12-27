@@ -12,6 +12,11 @@
     "fulltext": "Straipsnio tekstas",
     "submit": "Pateikti"
   },
+  "Header": {
+    "My Blog": "Mano Dienorastis",
+    "Create new post": "Sukurkit nauja straipsni",
+    "Login": "Prisijungti"
+  },
   "comment" : {
     "text" : "Komentaro tekstas"
   }

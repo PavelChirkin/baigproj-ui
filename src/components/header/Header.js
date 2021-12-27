@@ -9,10 +9,15 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import {NavLink} from "react-router-dom";
 import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
+        backgroundColor: "antiquewhite",
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
     },
     toolbarTitle: {
         flex: 1,
@@ -21,26 +26,34 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         overflowX: 'auto',
     },
+    inputRoot: {
+        color: 'inherit',
+    },
     toolbarLink: {
         padding: theme.spacing(1),
         flexShrink: 0,
     },
 }));
 
+
+
 export default function Header(props) {
     const classes = useStyles();
     const { sections, title } = props;
 
+    const {t} = useTranslation('Header');
+
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
+
                 <Link
                     variant="button"
-                    color="text.primary"
+                    color="primary"
                     to="/posts/create"
                     sx={{my: 1, mx: 1.5}}
                     component={NavLink}>
-                    Create new post
+                    {t('Create new post')}
                 </Link>
                 <Link
                     component="h2"
@@ -52,13 +65,13 @@ export default function Header(props) {
                     className={classes.toolbarTitle}
                     component={NavLink}
                 >
-                    My Blog
+                    {t('My Blog')}
                 </Link>
                 <IconButton>
                     <SearchIcon />
                 </IconButton>
                 <Button variant="outlined" size="small">
-                    Sign up
+                    {t('Login')}
                 </Button>
                 <LanguageSwitcher/>
             </Toolbar>
