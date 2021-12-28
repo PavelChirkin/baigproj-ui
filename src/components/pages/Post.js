@@ -52,14 +52,7 @@ const Post = () => {
                         component={NavLink}>
                         Update Post
                     </Link>
-                    <Link
-                        variant="button"
-                        color="primary"
-                        to={`/posts/delete/${post.id}`}
-                        sx={{my: 1, mx: 1.5}}
-                        component={NavLink}>
-                        Delete Post
-                    </Link>
+
                     <Link
                         variant="button"
                         color="primary"

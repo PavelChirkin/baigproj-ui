@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useStyles} from "react";
-import {getPosts} from "../../api/postApi";
+import {deletePost, getPosts} from "../../api/postApi";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import {Grid} from "@material-ui/core";
@@ -11,6 +11,9 @@ import '../../style.css'
 import {NavLink} from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import {useTranslation} from "react-i18next";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import PreviewIcon from '@mui/icons-material/Preview';
+
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -20,6 +23,13 @@ const Posts = () => {
             .then(({data}) => setPosts(data))
             .catch((error) => console.log(error))
     }, []);
+
+    const onDeletePost = (postId) => {
+        deletePost(postId)
+            .then(() => { posts.filter(p => p.id !== postId);
+            })
+            .catch((error) => console.log(error))
+    };
 
     const {t} = useTranslation();
 
@@ -50,11 +60,13 @@ const Posts = () => {
                                     to={`/posts/view/${post.id}`}
                                     sx={{my: 1, mx: 1.5}}
                                     component={NavLink}>
-                                    View details
+                                    <PreviewIcon fontSize="large"/>
                                 </Link>
-
-                                <Button size="small" color="primary">
-                                    Edit
+                                <Button className="single_button"
+                                        variant="outlined"
+                                        color="error"
+                                        onClick={() => onDeletePost(post.id)}>
+                                    <DeleteForeverIcon/>
                                 </Button>
                             </CardActions>
                         </Card>
