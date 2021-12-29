@@ -8,6 +8,9 @@ import UpdatePost from "../forms/UpdatePost";
 import Post from "../pages/Post";
 import {makeStyles} from "@material-ui/core/styles";
 import Image from "../../img/texturetastic_gray.png";
+import Login from "../forms/Login";
+import UserForm from "../forms/UserForm";
+import SecuredRoute from "../security/SecuredRoute";
 
 
 
@@ -28,6 +31,10 @@ export default () => {
                 <Route path="/posts/create" element={<CreatePost/>}/>
                 <Route path="/posts/view/:postId" element={<Post/>}/>
                 <Route path="/posts/update/:postId" element={<UpdatePost/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/users/registration" element={<SecuredRoute roles={['ADMIN']}/>}>
+                    <Route path="/users/registration" element={<UserForm/>}/>
+                </Route>
             </Routes>
         </>
     )

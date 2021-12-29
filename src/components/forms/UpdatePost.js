@@ -25,18 +25,20 @@ const validationSchema = Yup.object().shape({
 
 export default () => {
 
-    const [notification, setNotification] = useState({isVisible: false, message:'', severity: ''});
-
+    const [notification, setNotification] = useState({isVisible: false, message: '', severity: ''});
     const {postId} = useParams();
-
+    const [post, setPost] = useState({});
+    const {t} = useTranslation('UpdatePost');
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         getPost(postId)
-            .then(({data}) => setPost(data))
-            .catch((error) => console.log(error));
+            .then(({data}) => {
+                console.log(data);
+                setPost(data);
+            })
+            .catch((error) => console.log(error))
+            .finally(() => setLoading(false));
     }, []);
-
-    const [post, setPost] = useState([]);
-
 
     const onUpdatePost = (post, helpers) => {
         updatePost(post)
@@ -50,50 +52,56 @@ export default () => {
             .finally(() => helpers.setSubmitting(false));
     }
 
-    const {t} = useTranslation('UpdatePost');
 
     return (
+        <>
+            {
+                loading ? <div>Loading</div> :
 
-        <Formik initialValues={post}
-               // initialValues={props.post}
-                onSubmit={onUpdatePost}
-                validationSchema={validationSchema}>
-            {props => (
-                <Container maxWidth="sm">
-                    <Paper elevation={3} sx={{p: 1}}>
-                        {
-                            notification.isVisible &&
-                            <Alert severity={notification.severity} sx={{ width: '100%' }}>
-                                {notification.message}
-                            </Alert>
-                        }
-                        <Form className="post-form">
-                            <TextFieldInput error={post.title && !!props.errors.title}
-                                            fieldName="title"
-                                            label={t('title')}
-                                            placeholder="Type title..."/>
-                            <TextFieldInput error={props.touched.category && !!props.errors.category}
-                                            fieldName="category"
-                                            label={t('category')}/>
-                            <TextFieldInput error={props.touched.anons && !!props.errors.anons}
-                                            fieldName="anons"
-                                            label={t('anons')}
-                                            placeholder="Type anons..."
-                                            multiline
-                                            rows={3}/>
-                            <TextFieldInput error={props.touched.fulltext && !!props.errors.fulltext}
-                                            fieldName="fulltext"
-                                            label={t('fulltext')}
-                                            placeholder="Type yours post text..."
-                                            multiline
-                                            rows={6}/>
-                            {
-                                props.isSubmitting ? <CircularProgress/> : <Button type="submit">{t('submit')}</Button>
-                            }
-                        </Form>
-                    </Paper>
-                </Container>
-            )}
-        </Formik>
+
+                    <Formik initialValues={post}
+                        // initialValues={props.post}
+                            onSubmit={onUpdatePost}
+                            validationSchema={validationSchema}>
+                        {props => (
+                            <Container maxWidth="sm">
+                                <Paper elevation={3} sx={{p: 1}}>
+                                    {
+                                        notification.isVisible &&
+                                        <Alert severity={notification.severity} sx={{width: '100%'}}>
+                                            {notification.message}
+                                        </Alert>
+                                    }
+                                    <Form className="post-form">
+                                        <TextFieldInput error={post.title && !!props.errors.title}
+                                                        fieldName="title"
+                                                        label={t('title')}
+                                                        placeholder="Type title..."/>
+                                        <TextFieldInput error={props.touched.category && !!props.errors.category}
+                                                        fieldName="category"
+                                                        label={t('category')}/>
+                                        <TextFieldInput error={props.touched.anons && !!props.errors.anons}
+                                                        fieldName="anons"
+                                                        label={t('anons')}
+                                                        placeholder="Type anons..."
+                                                        multiline
+                                                        rows={3}/>
+                                        <TextFieldInput error={props.touched.fulltext && !!props.errors.fulltext}
+                                                        fieldName="fulltext"
+                                                        label={t('fulltext')}
+                                                        placeholder="Type yours post text..."
+                                                        multiline
+                                                        rows={6}/>
+                                        {
+                                            props.isSubmitting ? <CircularProgress/> :
+                                                <Button type="submit">{t('submit')}</Button>
+                                        }
+                                    </Form>
+                                </Paper>
+                            </Container>
+                        )}
+                    </Formik>
+            }
+        </>
     )
 }

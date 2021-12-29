@@ -70,7 +70,11 @@ export default function Header(props) {
                 <IconButton>
                     <SearchIcon />
                 </IconButton>
-                <Button variant="outlined" size="small">
+
+                <Button variant="outlined"
+                        sx={{my: 1, mx: 1.5}}
+                        to="/login"
+                        component={NavLink}>
                     {t('Login')}
                 </Button>
                 <LanguageSwitcher/>

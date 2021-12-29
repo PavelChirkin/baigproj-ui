@@ -7,7 +7,6 @@ export default ({fieldName, error, label, placeholder = 'Type here...', ...props
                  fullWidth
                  margin="dense">
         <Field error={error}
-               value={props.title}
                id={fieldName}
                name={fieldName}
                label={label}
