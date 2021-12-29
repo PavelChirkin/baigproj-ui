@@ -4,9 +4,10 @@ import * as Yup from 'yup';
 import TextFieldInput from "./TextFieldInput";
 import Container from "@mui/material/Container";
 import '../../style.css'
-import {createPost} from "../../api/postApi";
-import {useState} from "react";
+import {createPost, getPost, updatePost} from "../../api/postApi";
+import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
+import {useParams} from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
     title: Yup.string()
@@ -23,13 +24,25 @@ const validationSchema = Yup.object().shape({
 });
 
 export default () => {
+
     const [notification, setNotification] = useState({isVisible: false, message:'', severity: ''});
 
-    const onCreatePost = (post, helpers) => {
-        createPost(post)
+    const {postId} = useParams();
+
+    useEffect(() => {
+        getPost(postId)
+            .then(({data}) => setPost(data))
+            .catch((error) => console.log(error));
+    }, []);
+
+    const [post, setPost] = useState([]);
+
+
+    const onUpdatePost = (post, helpers) => {
+        updatePost(post)
             .then(({status}) => {
-                if(status === 201) {
-                    setNotification({isVisible: true, message: 'Post created successfully', severity: 'success'});
+                if(status === 202) {
+                    setNotification({isVisible: true, message: 'Post updated successfully', severity: 'success'});
                     helpers.resetForm();
                 }
             })
@@ -37,18 +50,13 @@ export default () => {
             .finally(() => helpers.setSubmitting(false));
     }
 
-    const {t} = useTranslation('CreatePost');
+    const {t} = useTranslation('UpdatePost');
 
     return (
 
-        <Formik initialValues={{
-            title: '',
-            anons: '',
-            category: '',
-            fulltext: ''
-
-        }}
-                onSubmit={onCreatePost}
+        <Formik initialValues={post}
+               // initialValues={props.post}
+                onSubmit={onUpdatePost}
                 validationSchema={validationSchema}>
             {props => (
                 <Container maxWidth="sm">
@@ -60,7 +68,7 @@ export default () => {
                             </Alert>
                         }
                         <Form className="post-form">
-                            <TextFieldInput error={props.touched.title && !!props.errors.title}
+                            <TextFieldInput error={post.title && !!props.errors.title}
                                             fieldName="title"
                                             label={t('title')}
                                             placeholder="Type title..."/>
