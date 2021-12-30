@@ -16,12 +16,12 @@ const validationSchema = Yup.object().shape({
 });
 
 export default () => {
-    const [notification, setNotification] = useState({isVisible: false, message:'', severity: ''});
+    const [notification, setNotification] = useState({isVisible: false, message: '', severity: ''});
     const {postId} = useParams();
     const onCreateComment = (comment, helpers) => {
         createComment(postId)
             .then(({status}) => {
-                if(status === 201) {
+                if (status === 201) {
                     setNotification({isVisible: true, message: 'Post created successfully', severity: 'success'});
                     helpers.resetForm();
                 }
@@ -33,10 +33,8 @@ export default () => {
     const {t} = useTranslation('CreateComment');
 
     return (
-
         <Formik initialValues={{
             text: ''
-
         }}
                 onSubmit={onCreateComment}
                 validationSchema={validationSchema}>
@@ -45,7 +43,7 @@ export default () => {
                     <Paper elevation={3} sx={{p: 1}}>
                         {
                             notification.isVisible &&
-                            <Alert severity={notification.severity} sx={{ width: '100%' }}>
+                            <Alert severity={notification.severity} sx={{width: '100%'}}>
                                 {notification.message}
                             </Alert>
                         }

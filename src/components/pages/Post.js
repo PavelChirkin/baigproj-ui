@@ -2,7 +2,6 @@ import {NavLink, useParams} from "react-router-dom";
 import {getAllCommentsByPostId, getPost} from "../../api/postApi";
 import React, {useEffect, useState} from "react";
 import {Divider, Paper} from "@material-ui/core";
-import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
@@ -12,9 +11,13 @@ import CardActions from "@material-ui/core/CardActions";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from '@mui/icons-material/Edit';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import {useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
 
 const Post = () => {
     const {postId} = useParams();
+    const {t} = useTranslation(Post);
+    const user = useSelector(state => state.user.user);
 
     useEffect(() => {
         getPost(postId)
@@ -47,18 +50,22 @@ const Post = () => {
                         <Divider light/>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" variant="outlined" color="primary"
-                                sx={{my: 1, mx: 1.5}}
-                                to={`/posts/update/${post.id}`}
-                                component={NavLink}>
-                            <EditIcon/>
-                        </Button>
-                        <Button size="small" variant="outlined"
-                                sx={{my: 1, mx: 1.5}}
-                                to={`/posts/${post.id}/comments`}
-                                component={NavLink}>
-                            <NoteAddIcon/>
-                        </Button>
+                        {user &&
+                        <>
+                            <Button size="small" variant="outlined" color="primary"
+                                    sx={{my: 1, mx: 1.5}}
+                                    to={`/posts/update/${post.id}`}
+                                    component={NavLink}>
+                                <EditIcon/>
+                            </Button>
+                            <Button size="small" variant="outlined"
+                                    sx={{my: 1, mx: 1.5}}
+                                    to={`/posts/${post.id}/comments`}
+                                    component={NavLink}>
+                                <NoteAddIcon/>
+                            </Button>
+                        </>
+                        }
                     </CardActions>
                 </Card>
             </Container>
@@ -71,18 +78,22 @@ const Post = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small" variant="outlined" color="secondary"
-                                    sx={{my: 1, mx: 1.5}}
-                                    to={'/posts/${post.id}/comments/${comment.id}'}
-                                    component={NavLink}>
-                                <DeleteForeverIcon/>
-                            </Button>
-                            <Button size="small" variant="outlined" color="primary"
-                                    sx={{my: 1, mx: 1.5}}
-                                    to={'/posts/${post.id}/comments'}
-                                    component={NavLink}>
-                                <EditIcon/>
-                            </Button>
+                            {user &&
+                            <>
+                                <Button size="small" variant="outlined" color="secondary"
+                                        sx={{my: 1, mx: 1.5}}
+                                        to={'/posts/${post.id}/comments/${comment.id}'}
+                                        component={NavLink}>
+                                    <DeleteForeverIcon/>
+                                </Button>
+                                <Button size="small" variant="outlined" color="primary"
+                                        sx={{my: 1, mx: 1.5}}
+                                        to={'/posts/${post.id}/comments'}
+                                        component={NavLink}>
+                                    <EditIcon/>
+                                </Button>
+                            </>
+                            }
                         </CardActions>
                     </Card>
                 ))}

@@ -40,13 +40,11 @@ export default () => {
     const {t} = useTranslation('CreatePost');
 
     return (
-
         <Formik initialValues={{
             title: '',
             anons: '',
             category: '',
             fulltext: ''
-
         }}
                 onSubmit={onCreatePost}
                 validationSchema={validationSchema}>

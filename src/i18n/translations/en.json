@@ -4,8 +4,11 @@
     "keyWithParams": "Hi {{name}} {{surname}}",
     "name": "Name"
   },
-  "post": {
+  "Post": {
     "title": "Post title"
+  },
+  "Posts": {
+    "Comments": "Comments"
   },
   "CreatePost": {
     "title": "Post title",
@@ -14,12 +17,27 @@
     "fulltext": "Full text",
     "submit": "Submit"
   },
+  "UpdatePost": {
+    "title": "Post title",
+    "category": "Category",
+    "anons": "Anons",
+    "fulltext": "Full text",
+    "submit": "Update"
+  },
   "Header": {
     "My Blog": "My Blog",
     "Create new post": "Create new post",
+    "Create new user": "Create new user",
     "Login": "Login"
   },
-  "comment" : {
+  "CreateComment" : {
     "text" : "Comment text"
+  },
+  "UserForm" : {
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "password": "Password",
+    "repassword": "Reenter password"
   }
 }

@@ -4,10 +4,12 @@ import * as Yup from 'yup';
 import TextFieldInput from "./TextFieldInput";
 import Container from "@mui/material/Container";
 import '../../style.css'
+import {useTranslation} from "react-i18next";
+
 const validationSchema = Yup.object().shape({
-    vardas: Yup.string()
+    name: Yup.string()
         .required(),
-    pavarde: Yup.string()
+    surname: Yup.string()
         .required(),
     email: Yup.string()
         .email()
@@ -17,10 +19,14 @@ const validationSchema = Yup.object().shape({
     repassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
 });
-export default () => (
+
+export default () => {
+    const {t} = useTranslation('UserForm');
+
+return (
     <Formik initialValues={{
-        vardas: '',
-        pavarde: '',
+        name: '',
+        surname: '',
         email: '',
         password: '',
         repassword: ''
@@ -37,21 +43,21 @@ export default () => (
                 <Paper elevation={3} sx={{p: 1}}>
                     <Form className="product-form">
                         <TextFieldInput
-                            error={props.touched.vardas && !!props.errors.vardas}
-                            fieldName="vardas" label="Vardas:"
-                            placeholder="Iveskit varda..."/>
-                        <TextFieldInput error={props.touched.pavarde && !!props.errors.pavarde}
-                                        fieldName="pavarde" label="Pavarde:"
-                                        placeholder="Iveskit pavarde..."/>
+                            error={props.touched.name && !!props.errors.name}
+                            fieldName="name" label={t('name')}
+                            placeholder="Enter your name..."/>
+                        <TextFieldInput error={props.touched.surname && !!props.errors.surname}
+                                        fieldName="surname" label={t('surname')}
+                                        placeholder="Enter your surname..."/>
                         <TextFieldInput error={props.touched.email && !!props.errors.email}
-                                        fieldName="email" label="email:"
-                                        placeholder="Iveskit email..."/>
+                                        fieldName="email" label={t('email')}
+                                        placeholder="Enter your email..."/>
                         <TextFieldInput error={props.touched.password && !!props.errors.password}
-                                        fieldName="password" label="Password:"
+                                        fieldName="password" label={t('password')}
                                         placeholder="Type password..."
                                         type="password"/>
                         <TextFieldInput error={props.touched.repassword && !!props.errors.repassword}
-                                        fieldName="repassword" label="Repeat password:"
+                                        fieldName="repassword" label={t('repassword')}
                                         placeholder="Repeat password..."
                                         type="password"/>
                         {
@@ -65,3 +71,4 @@ export default () => (
         )}
     </Formik>
 )
+}

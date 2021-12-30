@@ -5,6 +5,9 @@
   "post": {
     "title": "Straipsnio pavadinimas"
   },
+  "Posts": {
+    "Comments": "Komentarai"
+  },
   "CreatePost": {
     "title": "Straipsnio pavadinimas",
     "category": "Kategorija",
@@ -12,12 +15,27 @@
     "fulltext": "Straipsnio tekstas",
     "submit": "Pateikti"
   },
+  "UpdatePost": {
+    "title": "Straipsnio pavadinimas",
+    "category": "Kategorija",
+    "anons": "Anonsas",
+    "fulltext": "Straipsnio tekstas",
+    "submit": "Atnaujinti"
+  },
   "Header": {
     "My Blog": "Mano Dienorastis",
     "Create new post": "Sukurkit nauja straipsni",
+    "Create new user": "Sukurkit nauja vartuotoja",
     "Login": "Prisijungti"
   },
-  "comment" : {
+  "CreateComment" : {
     "text" : "Komentaro tekstas"
+  },
+  "UserForm" : {
+    "name": "Vardas",
+    "surname": "Pavarde",
+    "email": "El. pastas",
+    "password": "Slaptazodis",
+    "repassword": "Pakartotinas slaptazodis"
   }
 }

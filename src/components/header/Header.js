@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
 import {useTranslation} from "react-i18next";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CardActions, Divider} from "@material-ui/core";
-import EditIcon from "@mui/icons-material/Edit";
+import {removeUser} from "../../store/slice/userSlice";
+
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -38,25 +36,42 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
 export default function Header(props) {
     const user = useSelector(state => state.user.user);
     const classes = useStyles();
     const {sections, title} = props;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const {t} = useTranslation('Header');
+    const onLogout = () => {
+        dispatch(removeUser());
+        navigate("/");
+    }
 
     return (
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
                 {user &&
-                <Button variant="outlined" color="primary"
-                        sx={{my: 1, mx: 1.5}}
-                        to={'/posts/create'}
-                        component={NavLink}>
-                    {t('Create new post')}
-                </Button>
+                <>
+                    <CardActions>
+                        <Button variant="outlined"
+                                sx={{my: 1, mx: 1.5}}
+                                to="/posts/create"
+                                component={NavLink}>
+                            {t('Create new post')}
+                        </Button>
+                        {
+                            user.roles.includes('ADMIN') &&
+                            <Button variant="outlined"
+                                    sx={{my: 1, mx: 1.5}}
+                                    to="/users/registration"
+                                    component={NavLink}>
+                                {t('Create new user')}
+                            </Button>
+                        }
+                    </CardActions>
+                </>
                 }
                 <Link
                     component="h2"
@@ -71,14 +86,22 @@ export default function Header(props) {
                     {t('My Blog')}
                 </Link>
                 <CardActions>
-                <Button variant="outlined"
+                    {user ?
+                    <Button variant="outlined"
+                            sx={{my: 1, mx: 1.5}}
+                            to="/login"
+                            onClick={onLogout}>
+                        {t('Logout')}
+                    </Button>
+                    :
+                        <Button variant="outlined"
                         sx={{my: 1, mx: 1.5}}
                         to="/login"
                         component={NavLink}>
-                    {t('Login')}
-                </Button>
-                <p>  </p>
-                <LanguageSwitcher/>
+                        {t('Login')}
+                        </Button>
+                    }
+                    <LanguageSwitcher/>
                 </CardActions>
             </Toolbar>
         </React.Fragment>
