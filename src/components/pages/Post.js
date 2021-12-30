@@ -9,6 +9,9 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from '@mui/icons-material/Edit';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 
 const Post = () => {
     const {postId} = useParams();
@@ -48,13 +51,13 @@ const Post = () => {
                                 sx={{my: 1, mx: 1.5}}
                                 to={`/posts/update/${post.id}`}
                                 component={NavLink}>
-                            Update Post
+                            <EditIcon/>
                         </Button>
                         <Button size="small" variant="outlined"
                                 sx={{my: 1, mx: 1.5}}
-                                to={'/posts/${post.id}/comments'}
+                                to={`/posts/${post.id}/comments`}
                                 component={NavLink}>
-                            Create Comment
+                            <NoteAddIcon/>
                         </Button>
                     </CardActions>
                 </Card>
@@ -72,13 +75,13 @@ const Post = () => {
                                     sx={{my: 1, mx: 1.5}}
                                     to={'/posts/${post.id}/comments/${comment.id}'}
                                     component={NavLink}>
-                                Delete comment
+                                <DeleteForeverIcon/>
                             </Button>
                             <Button size="small" variant="outlined" color="primary"
                                     sx={{my: 1, mx: 1.5}}
                                     to={'/posts/${post.id}/comments'}
                                     component={NavLink}>
-                                Edit comment
+                                <EditIcon/>
                             </Button>
                         </CardActions>
                     </Card>

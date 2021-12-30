@@ -11,6 +11,8 @@ import {NavLink} from "react-router-dom";
 import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
+import {CardActions, Divider} from "@material-ui/core";
+import EditIcon from "@mui/icons-material/Edit";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -49,14 +51,12 @@ export default function Header(props) {
         <React.Fragment>
             <Toolbar className={classes.toolbar}>
                 {user &&
-                <Link
-                    variant="button"
-                    color="primary"
-                    to="/posts/create"
-                    sx={{my: 1, mx: 1.5}}
-                    component={NavLink}>
+                <Button variant="outlined" color="primary"
+                        sx={{my: 1, mx: 1.5}}
+                        to={'/posts/create'}
+                        component={NavLink}>
                     {t('Create new post')}
-                </Link>
+                </Button>
                 }
                 <Link
                     component="h2"
@@ -70,17 +70,16 @@ export default function Header(props) {
                 >
                     {t('My Blog')}
                 </Link>
-                <IconButton>
-                    <SearchIcon/>
-                </IconButton>
-
+                <CardActions>
                 <Button variant="outlined"
                         sx={{my: 1, mx: 1.5}}
                         to="/login"
                         component={NavLink}>
                     {t('Login')}
                 </Button>
+                <p>  </p>
                 <LanguageSwitcher/>
+                </CardActions>
             </Toolbar>
         </React.Fragment>
     );

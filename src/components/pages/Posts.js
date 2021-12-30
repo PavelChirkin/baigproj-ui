@@ -2,7 +2,7 @@ import React, {useEffect, useState, useStyles} from "react";
 import {deletePost, getPosts} from "../../api/postApi";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import {Grid} from "@material-ui/core";
+import {Divider, Grid} from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,6 +13,8 @@ import Link from "@material-ui/core/Link";
 import {useTranslation} from "react-i18next";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import PreviewIcon from '@mui/icons-material/Preview';
+import EditIcon from "@mui/icons-material/Edit";
+
 
 
 const Posts = () => {
@@ -46,23 +48,19 @@ const Posts = () => {
                                 <Typography>
                                     {post.anons}
                                 </Typography>
-                                <Typography>
-                                    {post.id}
-                                </Typography>
+                                <Divider light/>
                                 <Typography>
                                    Comments: {post.commentSet.length}
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Link
-                                    variant="button"
-                                    color="text.primary"
-                                    to={`/posts/view/${post.id}`}
-                                    sx={{my: 1, mx: 1.5}}
-                                    component={NavLink}>
-                                    <PreviewIcon fontSize="large"/>
-                                </Link>
-                                <Button className="single_button"
+                                <Button size="small" variant="outlined" color="primary"
+                                        sx={{my: 1, mx: 1.5}}
+                                        to={`/posts/view/${post.id}`}
+                                        component={NavLink}>
+                                    <PreviewIcon/>
+                                </Button>
+                                <Button size="small" variant="outlined" color="secondary"
                                         variant="outlined"
                                         color="error"
                                         onClick={() => onDeletePost(post.id)}>

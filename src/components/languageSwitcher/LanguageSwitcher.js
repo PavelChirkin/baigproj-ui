@@ -9,7 +9,7 @@ export default () => {
     }
 
     return (
-        <Select
+        <Select size="small"
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={i18n.language}
