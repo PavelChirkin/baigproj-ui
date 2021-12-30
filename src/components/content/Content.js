@@ -29,10 +29,10 @@ export default () => {
             <CssBaseline />
             <Routes>
                 <Route path="/" element={<Posts/>}/>
+                <Route path="/posts/view/:postId" element={<Post/>}/>
                 <Route path="/posts/create" element={<SecuredRoute/>}>
                     <Route path="/posts/create" element={<CreatePost/>}/>
                 </Route>
-                <Route path="/posts/view/:postId" element={<Post/>}/>
                 <Route path="/posts/update/:postId" element={<SecuredRoute/>}>
                 <Route path="/posts/update/:postId" element={<UpdatePost/>}/>
                 </Route>

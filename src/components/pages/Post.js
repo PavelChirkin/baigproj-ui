@@ -16,7 +16,6 @@ import {useSelector} from "react-redux";
 
 const Post = () => {
     const {postId} = useParams();
-    const {t} = useTranslation(Post);
     const user = useSelector(state => state.user.user);
 
     useEffect(() => {
