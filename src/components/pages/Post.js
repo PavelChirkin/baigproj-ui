@@ -10,9 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 
-
 const Post = () => {
-
     const {postId} = useParams();
 
     useEffect(() => {
@@ -20,7 +18,6 @@ const Post = () => {
             .then(({data}) => setPost(data))
             .catch((error) => console.log(error));
     }, []);
-
     const [post, setPost] = useState([]);
 
     useEffect(() => {
@@ -28,71 +25,61 @@ const Post = () => {
             .then(({data}) => setComments(data))
             .catch((error) => console.log(error));
     }, []);
-
     const [comments, setComments] = useState([]);
 
     return (
         <>
             <Container maxWidth="sm">
-                <Paper className="single_post">
-                    <h4>Title: {post.title}</h4>
-                    <Divider light />
-                    <p><b>Anons:</b> {post.anons}</p>
-                    <Divider light />
-                    <p><b>Category:</b> {post.category}</p>
-                    <Divider light />
-                    <p><b>Content:</b> {post.fulltext}</p>
-                    <Divider light />
-                    <div display="inline-flex">
-                    <Link
-                        variant="button"
-                        color="primary"
-                        to={`/posts/update/${post.id}`}
-                        sx={{my: 1, mx: 1.5}}
-                        component={NavLink}>
-                        Update Post
-                    </Link>
-
-                    <Link
-                        variant="button"
-                        color="primary"
-                        to={`/posts/delete/${post.id}`}
-                        sx={{my: 1, mx: 1.5}}
-                        component={NavLink}>
-                        Create Comment
-                    </Link>
-                </div>
-                </Paper>
-
+                <Card className="card">
+                    <CardContent className="cardContent">
+                        <h4>Title: {post.title}</h4>
+                        <Divider light/>
+                        <p><b>Anons:</b> {post.anons}</p>
+                        <Divider light/>
+                        <p><b>Category:</b> {post.category}</p>
+                        <Divider light/>
+                        <Typography gutterBottom variant="subtitle2" component="h2">
+                            {post.fulltext}
+                        </Typography>
+                        <Divider light/>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="small" variant="outlined" color="primary"
+                                sx={{my: 1, mx: 1.5}}
+                                to={`/posts/update/${post.id}`}
+                                component={NavLink}>
+                            Update Post
+                        </Button>
+                        <Button size="small" variant="outlined"
+                                sx={{my: 1, mx: 1.5}}
+                                to={'/posts/${post.id}/comments'}
+                                component={NavLink}>
+                            Create Comment
+                        </Button>
+                    </CardActions>
+                </Card>
             </Container>
             <Container maxWidth="sm">
                 {comments.map((comment) => (
                     <Card className="card">
                         <CardContent className="cardContent">
-                            <Typography gutterBottom variant="subtitle2" component="h2">
+                            <Typography gutterBottom variant="subtitle2" component="h1">
                                 {comment.text}
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Link
-                                variant="button"
-                                color="primary"
-                                size="small"
-                                to={`/posts/view/${post.id}`}
-                                sx={{my: 1, mx: 1.5}}
-                                component={NavLink}>
+                            <Button size="small" variant="outlined" color="secondary"
+                                    sx={{my: 1, mx: 1.5}}
+                                    to={'/posts/${post.id}/comments/${comment.id}'}
+                                    component={NavLink}>
                                 Delete comment
-                            </Link>
-                            <Link
-                                variant="button"
-                                color="primary"
-                                size="small"
-                                to={`/posts/view/${post.id}`}
-                                sx={{my: 1, mx: 1.5}}
-                                component={NavLink}>
+                            </Button>
+                            <Button size="small" variant="outlined" color="primary"
+                                    sx={{my: 1, mx: 1.5}}
+                                    to={'/posts/${post.id}/comments'}
+                                    component={NavLink}>
                                 Edit comment
-                            </Link>
-
+                            </Button>
                         </CardActions>
                     </Card>
                 ))}
